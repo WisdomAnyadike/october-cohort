@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="p">
+
+
+    </p>
+
+    <input type="text" id="input">
+
+    <button onclick="show()"> show </button>
+
+
+</body>
+
+</html>
+<script>
+    let string = 'javascript'
+    console.log(string.length);
+
+
+    string = string.toUpperCase()
+    // console.log(upperCaseString);
+    console.log(string);
+
+
+    let string1 = 'JavaScript'
+
+    string1 = string1.substr(4, 6);
+    console.log(string1);
+
+    let string2 = 'inDriver'
+    console.log(string2.substr(2, 5));
+    console.log(string2.substring(2, 7).toUpperCase());
+
+
+
+
+    let string3 = '30, Days Of , JavaScript'
+    console.log(string3.split(' , '));
+
+
+    let string4 = '30 Days Of JavaScript'
+    console.log(string4.replace('Java Script', 'Python'))
+    console.log(string4);
+
+
+    let string5 = '30 Days Of JavaScript'
+    console.log(string5.charAt(15))
+
+    let lastIndex = string5.length - 1
+    console.log(string.charAt(lastIndex)) // t
+
+    // let val = 'hello'
+    // val.length -1 
+
+    console.log('Bell'.charCodeAt(2));
+
+
+    let string6 = '30'
+    let string7 = "days"
+    console.log(string6.concat(" ", string7, " Of ", "JavaScript")) // 30 days Of JavaScript
+
+
+
+    let string8 = 'Love is the best to in this world'
+    console.log(string8.endsWith('Love is the best to in this world'));
+
+
+    let string9 = "30 days  of  javascript" // 30 days of javascript
+    string9.replaceAll(' o', 'o')
+
+
+    let pTag = document.getElementById('p')
+    let inputTag = document.getElementById('input')
+    function show() {
+        console.log(inputTag.value);
+        // pTag.innerHTML = `<span>${inputTag.value}</span>`
+          pTag.innerHTML = inputTag.value
+    }
+
+
+
+</script>

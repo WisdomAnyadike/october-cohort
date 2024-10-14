@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input"> <button onclick="sensor()"> click here </button>
+
+    <div id="preview">
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let input = document.getElementById('input')
+    let preview = document.getElementById('preview')
+    console.log(input);
+
+    function sensor(params) {
+        let inputValue = input.value
+        let output = inputValue.replaceAll('shit', "****").replaceAll('fool', "****")
+
+        preview.innerHTML = output
+
+    }
+
+
+
+
+</script>
