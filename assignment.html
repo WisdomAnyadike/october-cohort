@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="number" id="num" min="0" max="9">
+        <input type="submit" onclick="guess(event)">
+        <div id="preview"> </div>
+
+    </form>
+
+</body>
+
+</html>
+<script>
+
+
+    function guess(e) {
+        e.preventDefault()
+        let random = Math.floor(Math.random() * 10)
+        console.log(random);
+        let input = document.getElementById('num')
+        let num = Number(input.value)
+        if (random === num) {
+            preview.innerText = 'you are correct'
+        } else {
+            preview.innerText = `you are wrong , correct ans is ${random}`
+        }
+
+        input.value = ''
+    }
+
+    let string = '2tdhn'
+    console.log(typeof string);
+    string = +(string)
+    console.log(typeof string, string);
+
+    console.log(isNaN(string));
+
+    // red blue green yellow
+
+    let color = 'red'
+    if (color === 'red'){
+        console.log('color is red');
+    }else if ( color === 'green'){
+        console.log('color is green'); 
+    }else if ( color === 'yellow'){
+        console.log('color is green');
+    }else {
+        console.log('color is blue');
+    }
+
+    //1st 2nd 3rd 4th 5th 6th 7th
+
+</script>

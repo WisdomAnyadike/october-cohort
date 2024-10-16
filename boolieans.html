@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="increaseValue()"> click me </button>
+
+    <button onclick="askQuestion()"> click to say hey </button>
+
+    <br>
+
+
+
+    <img id="bulb" width="50px" height="50px"
+        src="https://media.istockphoto.com/id/901337994/vector/bulb-icon-stock-vector-illustration-flat-design.jpg?s=612x612&w=0&k=20&c=XxSvBJeH49A1TKNv-Vn46F2B7hx6RFOO_v5jtcHuDKs="
+        alt="">
+
+    <button onclick="toogleLight()"> switch </button>
+</body>
+
+</html>
+<script>
+    let value = 100
+    value = value + 5
+    value += 5
+    console.log(value);
+
+
+    // let ans = 3 % 2
+    // console.log(ans);
+
+    let ans = 3 ** 2
+    console.log(Math.pow(3, 2));
+    console.log(ans);
+    ans **= 2
+    console.log(ans);
+
+
+    let ans1 = 20
+    ans1 = ans1 - 5
+    console.log(ans1);
+
+    console.log(20 !== '20');
+    console.log(20 != '20');
+
+
+    console.log([1, 2] === [1, 2]);
+
+    let value1 = 0
+    function increaseValue() {
+        ++value1
+        ++value1
+        ++value1
+        console.log(++value1);
+
+    }
+
+    function askQuestion(params) {
+        // console.log(prompt('Tell me your name?'));
+        let userResponse = confirm('are your sure?')
+        console.log(userResponse);
+    }
+
+
+
+    if (' ') {
+        console.log('yayy , nepa has brought light');
+    }
+    let isLightsOn = false
+    let bulb = document.getElementById('bulb')
+
+    function toogleLight() {
+        isLightsOn = !isLightsOn
+        if (isLightsOn === true) {
+            bulb.src = "https://media.istockphoto.com/id/1358360405/vector/light-bulb-line-art.jpg?s=612x612&w=0&k=20&c=3HKiVAJiGQv_WE5yIx752bf2YZg-HuztCDxb_-9LWc4="
+        }else{
+            bulb.src = "https://media.istockphoto.com/id/901337994/vector/bulb-icon-stock-vector-illustration-flat-design.jpg?s=612x612&w=0&k=20&c=XxSvBJeH49A1TKNv-Vn46F2B7hx6RFOO_v5jtcHuDKs="
+        }
+
+    }
+
+
+
+</script>

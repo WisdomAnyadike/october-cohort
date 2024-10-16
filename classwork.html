@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" value="  3rd    " name="" class="val">
+    <button onclick="check()"> check </button>
+    <div id="preview"> </div>
+
+</body>
+
+</html>
+<script>
+
+    function check() {
+        
+        let input = document.querySelector('.val').value.trim().toLowerCase()
+        if (input === '1st') {
+            preview.innerHTML = 'sunday is the first day of the month'
+        } else if (input === '2nd') {
+            preview.innerHTML = 'monday is the first day of the month'
+        } else if (input === '3rd') {
+            preview.innerHTML = 'tuesday is the first day of the month'
+        } else if (input === '4th') {
+            preview.innerHTML = 'wednesday is the first day of the month'
+        } else if (input === '5th') {
+            preview.innerHTML = 'thursday is the first day of the month'
+        } else if (input === '6th') {
+            preview.innerHTML = 'friday is the first day of the month'
+        } else if (input === '7th') {
+            preview.innerHTML = 'saturday is the first day of the month'
+        } else {
+            preview.innerHTML = "invalid day"
+        }
+
+        document.querySelector('input').value = ''
+
+    }
+
+
+
+
+
+</script>
