@@ -17,30 +17,92 @@
 </html>
 <script>
 
+    // function check() {
+
+    //     let input = document.querySelector('.val').value.trim().toLowerCase()
+    //     if (input === '1st') {
+    //         preview.innerHTML = 'sunday is the first day of the month'
+    //     } else if (input === '2nd') {
+    //         preview.innerHTML = 'monday is the first day of the month'
+    //     } else if (input === '3rd') {
+    //         preview.innerHTML = 'tuesday is the first day of the month'
+    //     } else if (input === '4th') {
+    //         preview.innerHTML = 'wednesday is the first day of the month'
+    //     } else if (input === '5th') {
+    //         preview.innerHTML = 'thursday is the first day of the month'
+    //     } else if (input === '6th') {
+    //         preview.innerHTML = 'friday is the first day of the month'
+    //     } else if (input === '7th') {
+    //         preview.innerHTML = 'saturday is the first day of the month'
+    //     } else {
+    //         preview.innerHTML = "invalid day"
+    //     }
+
+    //     document.querySelector('input').value = ''
+
+    // }
+    // function check() {
+    //     let key = document.querySelector('.val').value.trim().toLowerCase()
+    //     switch (key) {
+    //         case "january":
+    //         case "march":
+    //         case "may":
+    //         case "july":
+    //         case "august":
+    //         case "october":
+    //         case "december":
+    //             preview.innerHTML = `${key.toUpperCase()} has 31 days`
+    //             break;
+
+    //         case "september":
+    //         case "april":
+    //         case "june":
+    //         case "november":
+    //             preview.innerHTML =  `${key.toUpperCase()} has 30 days`
+    //             break;
+    //         case "february":
+    //             preview.innerHTML = `${key.toUpperCase()} has  28/29 days`
+    //             break;
+
+
+    //         default:
+    //             preview.innerHTML = 'invalid day'
+    //             break;
+    //     }
+    // }
+
+
     function check() {
-        
-        let input = document.querySelector('.val').value.trim().toLowerCase()
-        if (input === '1st') {
-            preview.innerHTML = 'sunday is the first day of the month'
-        } else if (input === '2nd') {
-            preview.innerHTML = 'monday is the first day of the month'
-        } else if (input === '3rd') {
-            preview.innerHTML = 'tuesday is the first day of the month'
-        } else if (input === '4th') {
-            preview.innerHTML = 'wednesday is the first day of the month'
-        } else if (input === '5th') {
-            preview.innerHTML = 'thursday is the first day of the month'
-        } else if (input === '6th') {
-            preview.innerHTML = 'friday is the first day of the month'
-        } else if (input === '7th') {
-            preview.innerHTML = 'saturday is the first day of the month'
-        } else {
-            preview.innerHTML = "invalid day"
+        let key = document.querySelector('.val').value.trim().toLowerCase()
+
+        if (key === "january" || key === "march" || key === "may" || key === "july" || key === "august" || key === "august" || key === "octomber" || key === "december") {
+            preview.innerHTML = "There are 31 days in " + key.toUpperCase()
+
         }
+        else if (key === 'february') {
+            preview.innerHTML = "There are 28/29 days in" + key.toUpperCase()
 
-        document.querySelector('input').value = ''
-
+        }
+        else if (key === "april" || key === 'september' || key === 'june' || key === 'november') {
+            preview.innerText = 'There are thirty days in' + key.toUpperCase()
+        } else {
+            preview.innerHTML = 'invalid month'
+        }
     }
+
+    let isLightsOn = false
+//    if(isLightsOn)  {console.log('jump') } else{
+//     console.log("no jumping")
+//    } 
+
+
+   isLightsOn ? console.log('jump') :  console.log('no jumping');
+
+
+
+
+
+
 
 
 
