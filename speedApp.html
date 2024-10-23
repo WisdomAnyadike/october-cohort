@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="input1">
+    <input type="number" id="input2">
+    <button onclick="calcSpeed()"> calculate speed </button>
+    <div id="display"></div>
+
+</body>
+
+</html>
+<script>
+
+    function calcSpeed() {
+        let val1 = +(document.getElementById('input1').value)
+        let val2 = +(document.getElementById('input2').value)
+
+ display.innerHTML = ` The speed when there is a distance of ${val1}m and a time of ${val2}s is ${speedCalculator(val1, val2)}ms<sup>-1</sup>`
+
+
+    }
+
+    function speedCalculator(distance, time) {
+        let speed = distance / time
+        return speed
+    }
+
+    // console.log(speedCalculator(50,5));
+
+    // let value = speedCalculator(50, 5)
+
+</script>

@@ -10,10 +10,10 @@
 <body>
     <input type="text" id="inputOne">
     <input type="text" id="inputTwo">
-    <button onclick="calc()">+</button>
-    <button onclick="calc1()">-</button>
-    <button onclick="calc2()">/</button>
-    <button onclick="calc3()">x</button>
+    <button onclick="calc('+')">+</button>
+    <button onclick="calc('-')">-</button>
+    <button onclick="calc('/')">/</button>
+    <button onclick="calc('x')">x</button>
     <div id="divOne"></div>
 </body>
 
@@ -61,30 +61,39 @@ calc2()
     let input2 = document.getElementById('inputTwo')
     let div1 = document.getElementById('divOne')
 
-    function calc() {
+    function calc(symbol) {
+      
         let ans1 = input1.value
         let ans2 = input2.value
-
-        div1.innerHTML = +(ans1) + +(ans2)
+        if(symbol === '+'){
+            div1.innerHTML = +(ans1) + +(ans2)
+        }else if(symbol === '-'){
+            div1.innerHTML = +(ans1) - +(ans2)
+        }else if (symbol === '/'){
+            div1.innerHTML = +(ans1) / +(ans2)
+        }else{
+            div1.innerHTML = +(ans1) * +(ans2)
+        }
+       
     }
-    function calc1() {
-        let ans1 = input1.value
-        let ans2 = input2.value
+    // function calc1() {
+    //     let ans1 = input1.value
+    //     let ans2 = input2.value
 
-        div1.innerHTML = +(ans1) - +(ans2)
-    }
-    function calc2() {
-        let ans1 = input1.value
-        let ans2 = input2.value
+    //     div1.innerHTML = +(ans1) - +(ans2)
+    // }
+    // function calc2() {
+    //     let ans1 = input1.value
+    //     let ans2 = input2.value
 
-        div1.innerHTML = +(ans1) / +(ans2)
-    }
-    function calc3() {
-        let ans1 = input1.value
-        let ans2 = input2.value
+    //     div1.innerHTML = +(ans1) / +(ans2)
+    // }
+    // function calc3() {
+    //     let ans1 = input1.value
+    //     let ans2 = input2.value
 
-        div1.innerHTML = +(ans1) * +(ans2)
-    }
+    //     div1.innerHTML = +(ans1) * +(ans2)
+    // }
 
     // console.log(ans1);
     // console.log(run);

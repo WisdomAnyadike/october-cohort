@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="input1">
+    <button onclick="calcWeight()"> calculate weight </button>
+    <div id="display"></div>
+
+</body>
+
+</html>
+<script>
+    function calcWeight() {
+        let value = +(document.getElementById('input1').value)
+
+        display.innerHTML = weightCalculator(value)
+
+
+    }
+
+    function weightCalculator(mass) {
+        const gravity = 9.81
+        let weight = mass * gravity // 200 * 9.81
+        return weight
+    }
+
+
+
+
+    // weightCalculator(val) // 303
+
+
+    // let answer
+    // function saySmth(something) {
+    //     answer = something
+    // console.log(something);
+    // }
+
+    // let val = 'hello'
+    // saySmth(val) // answer = hello
+    // saySmth('wisdom') // answer = wisdom
+    // saySmth('run') // answer = run
+
+    // console.log(answer);
+
+
+    function add20ToNumMultiplication(num1, num2) {
+        let val = num1 * num2
+        return function add20() {
+            return function returnFinally() {
+                return val + 20
+            }
+        }
+    }
+
+
+
+    console.log(add20ToNumMultiplication(10, 20)()()); //200
+
+
+</script>
