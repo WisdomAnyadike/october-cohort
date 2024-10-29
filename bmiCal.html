@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input1">
+    <input type="text" id="input2">
+    <button onclick="calcBmi()"> Calculate BMI</button>
+    <div id="output"></div>
+</body>
+
+</html>
+
+<script>
+    function calcBmi() {
+        let inputOne = +(document.getElementById('input1').value)
+        let inputTwo = +(document.getElementById('input2').value)
+        let bmi = BMICalc(inputOne, inputTwo)
+
+        if (bmi < 18.5) {
+            output.innerHTML = `your bmi is ${bmi}, you are underweight`
+        } else if (bmi >= 18.5 && bmi < 25) {
+            output.innerHTML = `your bmi is ${bmi}, you are normal`
+        } else if (bmi >= 25 && bmi < 30) {
+            output.innerHTML = `your bmi is ${bmi}, you are overweight`
+        } else {
+            output.innerHTML = `your bmi is ${bmi}, you are obese`
+        }
+
+    }
+
+    function BMICalc(weight, height) {
+        let ans = weight / (height ** 2)
+        return ans
+    }
+
+
+
+    function calcBmi(params) {
+        let weight = +(document.getElementById('input1').value)
+        let height = +(document.getElementById('input2').value)
+
+          let bmi = weight / (height * height)
+        let group
+
+
+        if (bmi < 18.5) {
+           group = "Underweight"
+        }
+        else if(bmi < 25) {
+            group = 'Normal weight'
+        }
+        else if(bmi < 30) {
+            group = 'Overweight'
+        }
+        else{
+            group = 'obese'
+        }
+
+        output.innerHTML = `Your bmi is ${bmi.toFixed(1)} ${group}`
+    }
+</script>

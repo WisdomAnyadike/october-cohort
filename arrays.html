@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input" type="text">
+    <button onclick="add()"> add </button>
+    <div id="display"> </div>
+
+
+</body>
+
+</html>
+<script>
+
+    // let arr = new Array(5).fill('hello')
+    let arr = [1, 2, 3, 4, 'hello', undefined, null, [], {}, true]
+    let lastIndex = arr.length - 1
+    console.log(lastIndex);
+    console.log(arr[4]);
+    console.log(arr.length);
+    console.log(arr);
+
+    function add(params) {
+        let inputVal = document.getElementById('input').value
+        let myArr = inputVal.split('+')
+        console.log(myArr);
+        display.innerHTML = +(myArr[0]) + +(myArr[1])
+
+    }
+
+
+    const numbers = [1, 2, 3, 4, 5, 5, 46, 5]
+
+
+
+
+    console.log(numbers.indexOf(5)) // -> 4
+    // console.log(numbers.indexOf(0)) // -> -1
+    // console.log(numbers.indexOf(1)) // -> 0
+    // console.log(numbers.indexOf(6)) // -> -1
+
+
+    const nums = [1, 2, 3, 4, 5]
+    console.log(nums.toString()) // 1,2,3,4,5
+
+    const names = ['Asabeneh', 'Mathias', 'Elias', 'Brook']
+    console.log(names.toString()) // Asabeneh,Mathias,Elias,Brook
+
+    console.log(names.join('+'));
+
+    let newArray = nums.slice(2, 4)
+    console.log(newArray);
+
+    let valueRemoved = names.splice(2, 2)
+    console.log(valueRemoved);
+
+    console.log(names);
+    names.reverse()
+    console.log(names);
+
+</script>

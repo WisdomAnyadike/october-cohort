@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="convertCelsius()">convert</button>
+    <input type="text" id="input">
+    <div id="display"></div>
+</body>
+</html>
+<script>
+    function convertCelsius() {
+        let value = +(document.getElementById('input').value)
+        display.innerHTML = convertCelsiusToFahrenheit(value)
+    }
+    function convertCelsiusToFahrenheit(celcius) {
+        let Fahreneit = (celcius * 9/5 ) + 32
+        return Fahreneit;
+    }
+    
+
+    
+</script>

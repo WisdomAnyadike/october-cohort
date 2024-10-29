@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="input" type="text"> <button onclick="post()"> post todo </button>
+    <div id="display">
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let input = document.getElementById('input')
+    let display = document.getElementById('display')
+    let todos = ['hey' , 'hello' , 'sup']
+
+    function post() {
+      
+        if (input.value.trim()) {
+            todos.push(input.value)
+            console.log(todos);
+            displayer()
+
+        } else {
+            alert("todo field is mandatory")
+        }
+
+    }
+
+    function displayer() {
+        display.innerHTML = ''
+        for (let i = 0; i < todos.length ; i++) {
+            display.innerHTML += `<p> <span>${i + 1}</span>. ${todos[i]}  <button onclick="deleteTodo(${i})"> x </button> </p>`
+        }
+    }
+
+  displayer()
+
+    function deleteTodo(index) {
+        todos.splice(index, 1)
+        console.log(todos);
+        displayer()
+    }
+
+    // let arr = [1, 2, 3, 4]
+    // arr.splice(1, 2, 'hello', 'yo', 'wow')
+    // console.log(arr);
+
+
+ // let newElement = document.createElement('div')
+            // newElement.innerHTML = input.value
+            // display.prepend(newElement)
+</script>
