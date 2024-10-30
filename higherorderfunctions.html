@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+ <input type="text" oninput="changeColor()">
+</body>
+
+</html>
+<script>
+    //foreach , map , find , findIndex , reduce , some , every 
+
+    let arr = [1, 2, 3, 4, 5]
+
+    let myLoop = arr.forEach(function (num, i, y) {
+        console.log(num, i, y);
+    })
+
+
+
+    let myLoop2 = arr.map(function (num, i, y) {
+        console.log(num, i, y);
+        return i * 2
+    })
+    console.log(myLoop2);
+
+    let students = ['jamal', 'david', 'tolu', 'sola']
+    console.log(students.findIndex(function (student, i, studentsArr) {
+        return typeof student === "number"
+    }));
+
+
+    let someVal = students.every(function (student, i, studentsArr) {
+        // console.log(student, i, studentsArr);
+        return student.startsWith('t')
+    })
+
+    console.log(someVal);
+
+
+    let numbers = [23, 45, 678, 4, 21, 24, 887]
+
+    let total = 1
+    for (let index = 0; index < numbers.length; index++) {
+        total = total * numbers[index]
+    }
+
+
+    console.log(total);
+
+    let sumOfNums = numbers.reduce(function (a, c) {
+        return a * c
+    }, 1)
+    console.log(sumOfNums);
+
+function changeColor(params) {
+    document.querySelector('input').style.color = 'purple'
+    console.log(document.querySelector('input').value);
+}
+</script>

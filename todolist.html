@@ -23,14 +23,15 @@
 <script>
     let input = document.getElementById('input')
     let display = document.getElementById('display')
-    let todos = ['hey' , 'hello' , 'sup']
+    let todos = []
 
     function post() {
-      
+
         if (input.value.trim()) {
             todos.push(input.value)
             console.log(todos);
             displayer()
+            input.value = ''
 
         } else {
             alert("todo field is mandatory")
@@ -40,12 +41,12 @@
 
     function displayer() {
         display.innerHTML = ''
-        for (let i = 0; i < todos.length ; i++) {
-            display.innerHTML += `<p> <span>${i + 1}</span>. ${todos[i]}  <button onclick="deleteTodo(${i})"> x </button> </p>`
+        for (let i = 0; i < todos.length; i++) {
+            display.innerHTML += `<p> <span>${i + 1}</span>. ${todos[i]}  <button onclick="deleteTodo(${i})"> x </button> <button onclick="editTodo(${i})"> edit </button> </p>`
         }
     }
 
-  displayer()
+    displayer()
 
     function deleteTodo(index) {
         todos.splice(index, 1)
@@ -53,6 +54,17 @@
         displayer()
     }
 
+    function editTodo(index) {
+        let editValue = prompt('input your edit value here', todos[index])
+
+        if (editValue === todos[index] || editValue.trim() === '') {
+            alert('please input a value')
+        } else {
+            todos.splice(index, 1, editValue)
+            console.log(todos);
+            displayer()
+        }
+    }
     // let arr = [1, 2, 3, 4]
     // arr.splice(1, 2, 'hello', 'yo', 'wow')
     // console.log(arr);
