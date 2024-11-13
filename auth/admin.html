@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td,
+        thead,
+        tbody,
+        tr {
+            border-collapse: collapse;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table>
+            <thead>
+                <th> s/n </th>
+                <th> username </th>
+                <th> email </th>
+
+            </thead>
+            <tbody id="tableBody">
+
+
+            </tbody>
+        </table>
+
+
+
+    </main>
+</body>
+
+</html>
+<script>
+
+    let database = JSON.parse(localStorage.getItem('jobAppDataBase'))
+
+
+
+    function display() {
+        tableBody.innerHTML = ''
+        database.forEach((user, i) => {
+            tableBody.innerHTML += `  <tr>
+                <td>${i + 1} </td>
+                <td> ${user.username}</td>
+                <td> ${user.email} </td>
+            </tr>`
+
+        })
+
+    }
+
+    display()
+</script>

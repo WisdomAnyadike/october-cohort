@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="signup.css">
+  
+</head>
+
+<body>
+
+
+    <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span>
+
+        <div class="signin">
+
+            <div class="content">
+
+                <h2>Sign Up</h2>
+
+                <form class="form">
+
+                    <div class="inputBox">
+
+                        <input id="username" type="text"> <i>Username</i>
+
+                    </div>
+                    <div class="inputBox">
+
+                        <input id="email" type="email"> <i>Email</i>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <input id="url" type="portfolioURL"> <i>Porfolio URL</i>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <input id="password" type="password"> <i>Password</i>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <input id="confirmpassword" type="confirmpassword">
+                        <i>Confirm Password</i>
+                        <p id="pp" style="color: white;"></p>
+                    </div>
+
+                    <div class="links"> <a href="#"> Already have an account </a> <a href="#">Signin</a>
+
+                    </div>
+
+                    <div class="inputBox">
+                        <button onclick="signUp(event)">
+                            signup
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        
+
+    </section> <!-- partial -->
+
+   
+</body>
+
+</html>
+<script>
+    let database = JSON.parse(localStorage.getItem('jobAppDataBase')) || []
+    let urlRegex = /^https:[/]{2}(www.){0,1}\w+\.[A-Za-z]{2,}[/]{0,1}$/
+    let mailRegex = /^[a-z]+\w+[@][a-z]+([.][a-z]{2,3}){1,2}/i
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*(#)/:$'"+_-])[A-Za-z0-9*(#)$'/:"+_-]{8,20}$/
+
+
+
+    function signUp(ev) {
+        ev.preventDefault()
+        if (!username.value.trim() || !email.value.trim() || !url.value.trim() || !password.value.trim() || !confirmpassword.value.trim()) {
+            alert("all fields are mandatory")
+        } else if (!mailRegex.test(email.value.trim())) {
+            alert('invalid email')
+        } else if (!urlRegex.test(url.value.trim())) {
+            alert('invalid url')
+        } else if (!passwordRegex.test(password.value.trim())) {
+            alert('invalid password , password must include at least an uppercase letter, lowercase letter,symbol and a number . must also be at least 8 characters')
+        } else if (password.value.trim() !== confirmpassword.value.trim()) {
+            alert('password does not match')
+        } else if (database.find((user) => user.email === email.value.trim())) {
+            alert('user already exists')
+        } else {
+            let userObj = {
+                username: username.value.trim(),
+                email: email.value.trim(),
+                url: url.value.trim(),
+                password: password.value.trim()
+            }
+
+            database.push(userObj)
+            localStorage.setItem('jobAppDataBase', JSON.stringify(database))
+            console.log(database);
+        }
+    }
+
+    localStorage.setItem('someonesName', JSON.stringify({ name: 'wow' }))
+
+    let ourValue = JSON.parse(localStorage.getItem('someonesName'))
+    console.log(ourValue);
+
+    localStorage.removeItem('someonesName')
+
+  
+
+
+</script>
