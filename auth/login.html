@@ -98,21 +98,20 @@
             return obj.email === email.value.trim()
         })
 
-        if (database[userIndex].loginAttemps === 5) {
-            alert('your account has been barred')
-        }
 
-        else if (!user) {
+        if (!user) {
             alert('user doesnt exist , try signing up!')
             window.location.href = 'signup.html'
+        } else if (database[userIndex].loginAttemps === 5) {
+            alert('your account has been barred')
         } else if (user.password === password.value.trim()) {
             localStorage.setItem('loggedInUsersIndex', userIndex)
             database[userIndex].loginAttemps = 0
             localStorage.setItem('jobAppDataBase', JSON.stringify(database))
             window.location.href = 'dashboard.html'
         } else {
-           
-            database[userIndex].loginAttemps = ++database[userIndex].loginAttemps 
+
+            database[userIndex].loginAttemps = ++database[userIndex].loginAttemps
             localStorage.setItem('jobAppDataBase', JSON.stringify(database))
             alert('something went wrong , try again')
         }

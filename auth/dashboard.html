@@ -16,13 +16,13 @@
 <script>
     let database = JSON.parse(localStorage.getItem('jobAppDataBase'))
     let currentUserIndex = localStorage.getItem('loggedInUsersIndex')
-    let blogDatabase = JSON.parse(localStorage.getItem('blogDatabase1')) || []
+    let blogDatabase = database[currentUserIndex].blogPosts || []
 
     function checkUser() {
         if (currentUserIndex === null) {
             window.location.href = 'login.html'
         } else {
-            document.body.innerHTML = `welcome ${database[currentUserIndex].username}    <button onclick="logOut()"> logout </button>
+            document.body.innerHTML = `welcome ${database[currentUserIndex].username}    <button onclick="logOut()"> logout </button> <button onclick="profile()"> go to profile  </button>
             
             <input type="text" id="title" />
             <input type="text" id="description" />
@@ -80,7 +80,8 @@
         }
 
         blogDatabase.push(blogObj)
-        localStorage.setItem('blogDatabase1', JSON.stringify(blogDatabase))
+        database[currentUserIndex].blogPosts = blogDatabase
+        localStorage.setItem('jobAppDataBase', JSON.stringify(database))
         display()
     }
 
@@ -91,11 +92,12 @@
     function display() {
         preview.innerHTML = ''
         blogDatabase.forEach((blogObj, i) => {
-          preview.innerHTML += `
+            preview.innerHTML += `
              <p>  ${blogObj.title}</p>
              <p>${blogObj.description}</p>
              <img width="100px" height="100px" src="${blogObj.image}">
              <button onclick="like(${i})"> ${blogObj.liked ? 'liked' : 'not liked'} </button>
+             <button onclick="deletePost(${i})"> delete </button>
             `
         });
     }
@@ -104,10 +106,27 @@
 
 
     function like(index) {
-        blogDatabase[index].liked = !blogDatabase[index].liked 
-        localStorage.setItem('blogDatabase1', JSON.stringify(blogDatabase))
+        database[currentUserIndex].blogPosts[index].liked = !database[currentUserIndex].blogPosts[index].liked
+        localStorage.setItem('jobAppDataBase', JSON.stringify(database))
         display()
     }
 
+    function deletePost(index) {
+        database[currentUserIndex].blogPosts.splice(index , 1 )
+        localStorage.setItem('jobAppDataBase', JSON.stringify(database))
+        display()
+    }
 
+    function profile(params) {
+         window.location.href = 'profile.html'
+    }
+
+
+    // let obj = {name: 'daniel' , class:"js2a"}
+    // obj.age = 19
+    // obj.name = 'davido'
+    // console.log(obj);
+
+
+    // { name: 'ghjkl', email: 'hdjkl;s', password: 'hjkl;', loginattemps : '', blogposts : [{}, {}, {}] }
 </script>

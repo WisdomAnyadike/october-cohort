@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+</body>
+
+</html>
+<script>
+    let database = JSON.parse(localStorage.getItem('jobAppDataBase'))
+    let currentUserIndex = localStorage.getItem('loggedInUsersIndex')
+    let picture = database[currentUserIndex].profilePic
+    console.log(picture);
+
+
+    function checkUser() {
+        if (currentUserIndex === null) {
+            window.location.href = 'login.html'
+        } else {
+            document.body.innerHTML = `
+            <img style="border-radius:100%;" width="100px" height="100px"  id="image"> <input type="file" onchange="pickPicture(event)"> 
+             <br>
+            name: ${database[currentUserIndex].username}    
+            
+            
+            
+            `
+        }
+    }
+
+    checkUser()
+
+
+    function pickPicture(ev) {
+        let file = ev.target.files[0]
+        let reader = new FileReader()
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+        reader.addEventListener('load', (e) => {
+            picture = e.target.result
+            database[currentUserIndex].profilePic = picture
+            localStorage.setItem('jobAppDataBase', JSON.stringify(database))
+            displayPic()
+        })
+
+    }
+
+
+    function displayPic() {
+        picture === undefined ? image.src = 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg' : image.src = picture
+    }
+
+    displayPic()
+
+
+</script>
