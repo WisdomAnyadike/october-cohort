@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button onclick="functionality()"> click </button>
+    <input type="number">
+    <button class="button" onclick="decrease()"> click me </button>
+    <button onclick="resetbutton()"> reset </button>
+</body>
+
+</html>
+<script>
+
+
+
+    function hexaDecimal() {
+        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e']
+        let hexa = '#'
+
+
+        for (let index = 0; index < 6; index++) {
+            let picker = Math.floor(Math.random() * arr.length)//0-14 
+            hexa = hexa + arr[picker]
+        }
+
+        return hexa
+
+    }
+
+
+
+    let start = 0
+    let loggger = setInterval(() => {
+        start++
+        console.log(start);
+        if (start === 5) {
+            clearInterval(loggger)
+        }
+        console.log('js is beautiful');
+    }, 3000);
+
+    setInterval(() => {
+        document.body.style.backgroundColor = hexaDecimal()
+    }, 3000);
+
+
+
+
+
+    function functionality() {
+        document.querySelector('button').innerHTML = 'loading...'
+        document.querySelector('button').disabled = true
+
+        setTimeout(() => {
+            alert('you waited for 10secs for nothing , hahahahha')
+            document.querySelector('button').innerHTML = 'click'
+            document.querySelector('button').disabled = false
+        }, 10000)
+
+
+    }
+
+    let decreaser
+    function decrease() {
+        document.querySelector('.button').disabled = true
+        decreaser = setInterval(() => {
+            let num = Number(document.querySelector('input').value)
+            if (num === 0) {
+                clearInterval(decreaser)
+                alert('time up!')
+                document.querySelector('.button').disabled = false
+            } else {
+                document.querySelector('input').value = --num
+            }
+
+        }, 1000);
+    }
+
+    function resetbutton(params) {
+        if (!decreaser) {
+            alert('youve not started the stop watch')
+        } else {
+            clearInterval(decreaser)
+            document.querySelector('.button').disabled = false
+        }
+
+
+    }
+
+
+    let myDate = new Date().getTime()
+
+    console.log(myDate);
+
+    let myDate2 = new Date()
+    console.log(myDate2);
+
+
+    function createTimeFormat() {
+        let myDate1 = new Date()
+        let hours = myDate1.getHours()
+        let minutes = myDate1.getMinutes()
+        let seconds = myDate1.getSeconds()
+
+
+        return `${hours.toString().length < 2 ? '0' + hours : hours} : ${minutes.toString().length < 2 ? '0' + minutes : minutes} : ${seconds.toString().length < 2 ? '0' + seconds : seconds} ${hours < 12 ? 'AM' : 'PM'}`
+
+    }
+
+
+    let ptag = document.createElement('p')
+    document.body.appendChild(ptag)
+    setInterval(() => {
+        ptag.innerHTML = createTimeFormat();
+    }, 1000);
+
+</script>
