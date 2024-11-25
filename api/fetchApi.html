@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   
+
+
+
+</body>
+
+</html>
+<script>
+
+    function display(params) {
+
+        document.body.innerHTML = 'loading....'
+
+        fetch('https://dummyjson.com/products').then((res) => res.json()).then((data) => {
+            document.body.innerHTML = `  <div class="wrapper">
+        <div class="row " style="display: flex; flex-wrap: wrap; flex-direction: row; ">
+
+
+        </div>
+    </div>`
+            data.products.forEach((obj, index) => {
+
+                document.querySelector('.row').innerHTML += `<div style="margin: 20px;" class="card">
+        <div class="image"> </div>
+        <div class="product">
+            <span class="product-name"> ${obj.title}</span>
+            <span class="product-author">By Hasnain</span>
+        </div>
+        <div class="product-rating">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+        </div>
+        <div class="description">
+            <p>${obj.description}</p>
+        </div>
+        <div class="price">
+            <div>
+                <span class="before-price">£${obj.price}</span>
+                <span class="now-price">£ ${(obj.price - (obj.price * (obj.discountPercentage / 100))).toFixed(1)}</span>
+            </div>
+            <button onclick="seeMore(${index + 1})">see more</button>
+        </div>
+    </div>`
+
+                document.querySelectorAll('.image')[index].style.backgroundImage = `url(${obj.images[0]}) `
+                document.querySelectorAll('.image')[index].style.backgroundSize = "contain"
+                document.querySelectorAll('.image')[index].style.backgroundRepeat = "no-repeat"
+
+            });
+
+
+
+
+
+
+
+
+        }).catch((el) =>
+            document.body.innerHTML = 'error fetching..'
+        )
+    }
+
+    display()
+
+
+
+    function seeMore(i) {
+        document.body.innerHTML = 'loading...'
+        fetch(`https://dummyjson.com/products/${i}`)
+            .then(res => res.json())
+            .then((data) => {
+                document.body.innerHTML = `
+  <div class="container">
+    <button onclick="goBack()"> go back </button>
+    <h1 class="hd"><span class="heading"> ${data.title}</span></h1>
+    <div class="card_wrapper">
+      <div class="card_image">
+        <img src="${data.images[0]}" alt="card image">
+      </div>
+      <div class="card_content">
+        <h1 class="card_title">Brand new glasses going on sale this week</h1>
+        <p class="card_subtitle">Get yours now before it's too late</p>
+        <p class="card_description"> ${data.description}</p>
+        <h1 class="card_price">$499.99</h1>
+        <a href="3" class="card_btn">Buy Now</a>
+        
+      </div>
+    </div>
+  </div>`
+
+
+
+
+
+            }).catch((err) =>{
+                
+                
+                alert(err)
+                document.body.innerHTML = 'error fetching product....'
+            
+            })
+
+
+
+
+    }
+
+    function goBack(params) {
+        document.body.innerHTML = ''
+        display()
+    }
+
+
+</script>

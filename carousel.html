@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="carousel">
+
+
+
+    </div>
+
+    <input type="file" onchange="pickPicture(event)">
+
+
+</body>
+
+</html>
+<script>
+    let index = 0
+    let array = JSON.parse(localStorage.getItem('carouselItems')) || []
+
+
+    function displayCarousel() {
+        if (array.length != 0) {
+            carousel.innerHTML = ` <button onclick="prev()"> prev </button> <img width="300px" height="300px" src="${array[index]}" />  <button onclick="next()"> next </button>`
+        }
+    }
+
+
+    function next() {
+        if (index === array.length - 1) {
+            index = 0
+
+        } else {
+            index++
+
+        }
+        displayCarousel()
+    }
+
+    function prev() {
+        if (index === 0) {
+            index = array.length - 1
+        } else {
+            index--
+        }
+
+        displayCarousel()
+    }
+
+    function pickPicture(e) {
+        let file = e.target.files[0]
+        let reader = new FileReader()
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+        reader.addEventListener('load', (e) => {
+            array.push(e.target.result)
+            localStorage.setItem('carouselItems', JSON.stringify(array))
+            displayCarousel()
+        })
+    }
+
+
+    displayCarousel()
+
+</script>
