@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tbody,
+        th,
+        thead,
+        tr,
+        th,
+        td {
+            border-collapse: collapse;
+            border: 1px solid green;
+            padding: 10px;
+        }
+
+        #forEditing {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="resetMe()"> reset </button>
+    <div id="forPosting">
+        <input type="text" id="todo">
+        <input type="text" id="content">
+        <button id="postButton" onclick="postTodo()">post todo</button>
+    </div>
+
+    <div id="forEditing">
+        <input type="text" id="edittodo">
+        <input type="text" id="editcontent">
+        <button id="editButton" onclick="editTodo()"> edit todo</button>
+    </div>
+
+
+    <table>
+        <thead>
+            <th>
+                s/n
+            </th>
+            <th>
+                todo
+            </th>
+            <th>
+                content
+            </th>
+            <th>
+                edit
+            </th>
+            <th>
+                delete
+            </th>
+        </thead>
+        <tbody id="tbody">
+
+
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
+<script>
+
+    // fetch().then((res) => res.json()).then((data) => console.log(data)).catch((err) => {
+    //     console.log(err);
+    // })
+
+    // async function postToBackend(params) {
+    //     try {
+    //         const res = await fetch()
+    //         const data = await res.json()
+
+    //     } catch (error) {
+
+    //     }
+    // }
+
+    let currentId
+    let currentTodo
+
+
+    function postTodo(params) {
+        postButton.innerHTML = 'loading..'
+        postButton.disabled = true
+        if (!todo.value.trim() || !content.value.trim()) {
+            alert('all fields are mandatory')
+            return
+        }
+
+        let todoObj = {
+            todo: todo.value,
+            content: content.value
+        }
+
+
+        fetch('http://localhost:3000/todos', {
+            "method": 'POST',
+            "content-type": 'application/json',
+            "body": JSON.stringify(todoObj)
+        }).then((res) => res.json()).then(() => {
+            alert('data sent successfully')
+            postButton.disabled = false
+            postButton.innerHTML = 'post todo'
+            display()
+        }).catch((err) => {
+            alert(err)
+            postButton.disabled = false
+            postButton.innerHTML = 'post todo'
+        }
+
+        )
+    }
+
+
+    function display() {
+        fetch('http://localhost:3000/todos').then((res) => res.json()).then((data) => {
+
+            tbody.innerHTML = ''
+            data.forEach((todoObj, index) => {
+                tbody.innerHTML += `  <tr>
+                <td> ${index + 1}</td>
+                <td> ${todoObj.todo}</td>
+                <td> ${todoObj.content}</td>
+                <td> <button onclick="showEditIndex('${todoObj.id}')"> edit </button></td>
+                <td> <button onclick="deleteTodo('${todoObj.id}')"> delete </button> </td>
+            </tr>`
+            });
+
+
+        }).catch((err) => {
+            alert(err)
+        })
+    }
+
+    display()
+
+    function showEditIndex(id) {
+        currentId = id
+
+        console.log(currentId);
+        forPosting.style.display = 'none'
+        forEditing.style.display = 'block'
+
+
+        fetch('http://localhost:3000/todos/' + id).then((res) => res.json()).then((data) => {
+            edittodo.value = data.todo
+            editcontent.value = data.content
+            currentTodo = data
+        }).catch((err) => {
+            alert(err)
+        })
+    }
+
+
+    function editTodo() {
+
+
+        editButton.innerHTML = 'loading..'
+        editButton.disabled = true
+
+        if (!edittodo.value.trim() || !editcontent.value.trim()) {
+            alert('all fields are mandatory')
+            editButton.disabled = false
+            editButton.innerHTML = 'edit todo'
+            return
+        }
+
+        if (currentTodo.todo === edittodo.value.trim() && currentTodo.content === editcontent.value.trim()) {
+            alert('please edit todo')
+            editButton.disabled = false
+            editButton.innerHTML = 'edit todo'
+            return
+        }
+
+        forPosting.style.display = 'block'
+        forEditing.style.display = 'none'
+
+        let todoObj = {
+            todo: edittodo.value,
+            content: editcontent.value
+        }
+
+
+        fetch(`http://localhost:3000/todos/${currentId}`, {
+            "method": 'PUT',
+            "content-type": 'application/json',
+            "body": JSON.stringify(todoObj)
+        }).then((res) => res.json()).then(() => {
+            alert('data sent successfully')
+            editButton.disabled = false
+            editButton.innerHTML = 'edit todo'
+            display()
+        }).catch((err) => {
+            alert(err)
+        })
+
+    }
+
+    function resetMe() {
+        forPosting.style.display = 'block'
+        forEditing.style.display = 'none'
+    }
+
+    function deleteTodo(id) {
+        let confirmer = confirm("are you sure?")
+        if (confirmer) {
+            fetch(`http://localhost:3000/todos/${id}`, {
+                "method": 'DELETE'
+            }).then((res) => res.json()).then(() => {
+                alert('data deleted successfully')
+                display()
+            }).catch((err) => {
+                alert(err)
+            })
+        }
+
+
+    }
+
+
+
+</script>

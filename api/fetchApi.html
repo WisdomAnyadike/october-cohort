@@ -9,7 +9,7 @@
 </head>
 
 <body>
-   
+
 
 
 
@@ -52,7 +52,7 @@
                 <span class="before-price">£${obj.price}</span>
                 <span class="now-price">£ ${(obj.price - (obj.price * (obj.discountPercentage / 100))).toFixed(1)}</span>
             </div>
-            <button onclick="seeMore(${index + 1})">see more</button>
+            <button onclick="seeMore(${index + 1} , ${data.products.length})">see more</button>
         </div>
     </div>`
 
@@ -78,7 +78,8 @@
 
 
 
-    function seeMore(i) {
+    function seeMore(i, lenght) {
+        console.log(lenght);
         document.body.innerHTML = 'loading...'
         fetch(`https://dummyjson.com/products/${i}`)
             .then(res => res.json())
@@ -86,19 +87,21 @@
                 document.body.innerHTML = `
   <div class="container">
     <button onclick="goBack()"> go back </button>
-    <h1 class="hd"><span class="heading"> ${data.title}</span></h1>
+    <h1 class="hd"><span class="heading"> ${data.brand ? data.brand : 'no brand yet'}</span></h1>
     <div class="card_wrapper">
+        <button onclick="prev(${i} , ${lenght})"> prev </button>
       <div class="card_image">
         <img src="${data.images[0]}" alt="card image">
       </div>
       <div class="card_content">
-        <h1 class="card_title">Brand new glasses going on sale this week</h1>
+        <h1 class="card_title">${data.title}</h1>
         <p class="card_subtitle">Get yours now before it's too late</p>
         <p class="card_description"> ${data.description}</p>
-        <h1 class="card_price">$499.99</h1>
+        <h1 class="card_price">$ ${data.price}</h1>
         <a href="3" class="card_btn">Buy Now</a>
         
       </div>
+      <button  onclick="next(${i} , ${lenght})" > next </button>
     </div>
   </div>`
 
@@ -106,12 +109,12 @@
 
 
 
-            }).catch((err) =>{
-                
-                
+            }).catch((err) => {
+
+
                 alert(err)
                 document.body.innerHTML = 'error fetching product....'
-            
+
             })
 
 
@@ -124,5 +127,29 @@
         display()
     }
 
+    function prev(index, lenght) {
+        console.log(lenght);
+        if (index === 1) {
+            index = lenght
+        } else {
+            index--
+        }
+
+
+        seeMore(index , lenght)
+    }
+
+
+    function next(index, lenght) {
+        console.log(lenght);
+        if (index === lenght) {
+            index = 1
+        } else {
+            index++
+        }
+
+
+        seeMore(index , lenght)
+    }
 
 </script>
