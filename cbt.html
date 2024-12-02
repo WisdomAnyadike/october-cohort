@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="forCbt">
+
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let questions = [
+        {
+            name: 'what is your name?',
+            options: ['wisdom', 'daniel', 'tolu', 'david'],
+            answer: 'wisdom'
+        },
+        {
+            name: 'what language do you love?',
+            options: ['english', 'yoruba', 'js', 'python'],
+            answer: 'js'
+        },
+        {
+            name: 'where is sqi located?',
+            options: ['dugbe', 'challenge', 'mobil', 'iworoad'],
+            answer: 'dugbe'
+        }
+        , {
+            name: 'whats your best food?',
+            options: ['rice', 'eba', 'beans', 'chicken'],
+            answer: 'rice'
+        },
+
+        {
+            name: 'whats is 5 + 7?',
+            options: ['300', '15', '12', '16'],
+            answer: '12'
+        },
+        {
+            name: 'whats is the capital of japan?',
+            options: ['tokyo', 'china', 'isreal', 'nigeria'],
+            answer: 'tokyo'
+        }
+    ]
+
+    let index = 0
+    let score = []
+
+
+    function displayCbt(button = '') {
+        forCbt.innerHTML = `
+         <p> Question : ${questions[index].name} </p>
+             <p> ${questions[index].options[0]} <input onchange="checkAnswer(event , ${index})"  type="radio" name="option${index}"  value="${questions[index].options[0]}"/> <p/>
+            <p> ${questions[index].options[1]} <input onchange="checkAnswer(event , ${index})"  type="radio" name="option${index}"  value="${questions[index].options[1]}"/> <p/>
+             <p> ${questions[index].options[2]} <input onchange="checkAnswer(event , ${index})"  type="radio" name="option${index}"  value="${questions[index].options[2]}"/> <p/>
+             <p> ${questions[index].options[3]} <input onchange="checkAnswer(event , ${index})"  type="radio" name="option${index}"  value="${questions[index].options[3]}"/> <p/>
+        
+          <button onclick="prev()"> prev </button>    ${button}        
+        `
+    }
+
+
+
+    displayCbt(`<button onclick="next()"> next </button>`)
+
+
+    function next() {
+        if (index === questions.length - 2) {
+            index++
+            displayCbt(`<button onclick="submit()"> submit </button>`)
+        } else {
+            index++
+            displayCbt(`<button onclick="next()"> next </button>`)
+        }
+
+    }
+
+    function prev() {
+        if (index === 0) {
+            index = questions.length - 1
+            displayCbt(`<button onclick="submit()"> submit </button>`)
+        } else {
+            index--
+            displayCbt(`<button onclick="next()"> next </button>`)
+        }
+
+
+    }
+
+    function checkAnswer(ev, i) {
+        console.log(ev.srcElement.value, questions[i].answer);
+        if (ev.target.value === questions[i].answer) {
+            // score.splice(index, 1, 1)
+           score[index] = 5
+           
+
+        } else {
+            // score.splice(index, 1, 0)
+            score[index] = 0
+        }
+
+        console.log(score);
+    }
+
+
+
+</script>
