@@ -100,8 +100,8 @@
         console.log(ev.srcElement.value, questions[i].answer);
         if (ev.target.value === questions[i].answer) {
             // score.splice(index, 1, 1)
-           score[index] = 5
-           
+            score[index] = 5
+
 
         } else {
             // score.splice(index, 1, 0)
@@ -110,7 +110,39 @@
 
         console.log(score);
     }
+    // [5,5,0,0,0,5]
+
+    function submit(params) {
+        let confirmer = window.confirm('Are you sure?')
+        if (confirmer) {
+            let sumofScore = score.reduce((i, e) => i + e, 0)
+            if (sumofScore == questions.length * 5) {
+                alert('You got a perfect score')
+                finishedCbt(`You got a perfect score , you scored ${sumofScore}/${questions.length * 5}`)
+            } else if (sumofScore == 0) {
+                alert('You are an olodo')
+                finishedCbt(`You are an olodo , you scored ${sumofScore}/${questions.length * 5}`)
+            } else {
+                alert(`You got ${sumofScore}/${questions.length * 5}`)
+                finishedCbt(`You got ${sumofScore}/${questions.length * 5}`)
+            }
+        }
 
 
 
+    }
+
+
+    function finishedCbt(params) {
+        forCbt.innerHTML = `
+       ${params} , thank you for participating \n
+      you wanna try again?  <button onclick="resetCbt()"> reset </button>
+    `
+    }
+
+
+    function resetCbt() {
+        index = 0
+        displayCbt(`<button onclick="next()"> next </button>`)
+    }
 </script>
