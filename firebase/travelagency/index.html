@@ -21,7 +21,7 @@
   </div>
   <div>
     <label for="password"> password</label>
-    <input type="text" id="password">
+    <input type="password" id="password"> <button onclick="showorhide(event)"> show </button>
   </div>
 
   <button onclick="signUp()"> sign up</button>
@@ -49,8 +49,9 @@
   function signUp() {
     let email = document.getElementById('email').value.trim()
     let password = document.getElementById('password').value.trim()
+    let username = document.getElementById('username').value.trim()
 
-    if (!email || !password) {
+    if (!email || !password || !username) {
       alert('all fields are mandatory')
       return
     }
@@ -58,9 +59,28 @@
     auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in 
+
         var user = userCredential.user;
-        alert('successful signup')
-        // ...
+        user.updateProfile({
+          displayName: username,
+        }).then(() => {
+         alert('username updated');
+          // Update successful
+          // ...
+        }).catch((error) => {
+          // An error occurred
+          // ...
+          alert(error)
+          return
+        });
+
+
+        setTimeout(() => {
+          alert('successful signup')
+          window.location.href = 'login.html'
+        }, 3000);
+
+
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -68,6 +88,13 @@
         alert(errorMessage)
         // ..
       });
+  }
+
+
+  function showorhide(ev) {
+    ev.target.previousElementSibling.type === "password" ? ev.target.previousElementSibling.type = "text" : ev.target.previousElementSibling.type = "password"
+
+    ev.target.previousElementSibling.type === "password" ? ev.target.innerHTML = "show" : ev.target.innerHTML = "hide"
   }
 
 </script>
