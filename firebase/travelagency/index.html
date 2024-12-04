@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> travel agency </title>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+
+</head>
+
+<body>
+  <div>
+    <label for="username"> username</label>
+    <input type="text" id="username">
+  </div>
+  <div>
+    <label for="email"> email</label>
+    <input type="text" id="email">
+  </div>
+  <div>
+    <label for="password"> password</label>
+    <input type="text" id="password">
+  </div>
+
+  <button onclick="signUp()"> sign up</button>
+</body>
+
+</html>
+<script>
+
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
+    authDomain: "october-de7a2.firebaseapp.com",
+    projectId: "october-de7a2",
+    storageBucket: "october-de7a2.firebasestorage.app",
+    messagingSenderId: "982925731403",
+    appId: "1:982925731403:web:426c347a7cf686da2d0fce"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+
+  function signUp() {
+    let email = document.getElementById('email').value.trim()
+    let password = document.getElementById('password').value.trim()
+
+    if (!email || !password) {
+      alert('all fields are mandatory')
+      return
+    }
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in 
+        var user = userCredential.user;
+        alert('successful signup')
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage)
+        // ..
+      });
+  }
+
+</script>
