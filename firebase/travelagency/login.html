@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
 </head>
@@ -22,6 +23,35 @@
     <button onclick="login()"> login </button>
 
     <button onclick="signInWithGoogle()"> sign in with google </button>
+    <br>
+
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        forgot password ?
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"> please enter your email</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="email"> Email</label>
+                    <input type="email" id="forgotmail" required>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="sendMail()" type="button" class="btn btn-primary"> send email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
@@ -56,9 +86,19 @@
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
+                console.log(user);
+                if (!user.emailVerified) {
+                    
+                    user.sendEmailVerification()
+                        .then(() => {
+                            alert('Cant login at the moment!, please verify your account before sign in')
+                        });
+                    return
+                }
+
                 alert('login success')
                 window.location.href = 'dashboard.html'
-                // ...
+
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -93,4 +133,27 @@
             });
     }
 
+
+    function sendMail(params) {
+        let forgotmail = document.getElementById("forgotmail").value.trim()
+        if (!forgotmail) {
+            alert('input field is mandatory')
+            return
+        }
+
+        firebase.auth().sendPasswordResetEmail(forgotmail)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                alert('reset mail has been sent!')
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(errorMessage)
+                // ..
+            });
+    }
+
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

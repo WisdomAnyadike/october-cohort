@@ -1,11 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
 </head>
+
 <body>
-    heyyy
+
 </body>
+
 </html>
+<script>
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
+        authDomain: "october-de7a2.firebaseapp.com",
+        projectId: "october-de7a2",
+        storageBucket: "october-de7a2.firebasestorage.app",
+        messagingSenderId: "982925731403",
+        appId: "1:982925731403:web:426c347a7cf686da2d0fce"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function checkUser(params) {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                document.body.innerHTML = `welcome <span > ${user.displayName}</span>  <button onclick="signUserOut()">log out</button>   <button onclick="deleteAcc()"> delete account </button>`
+                console.log(user);
+
+            } else {
+                window.location.href = 'login.html'
+                // User is signed out
+
+            }
+        });
+    }
+
+
+    checkUser()
+
+
+    function signUserOut(params) {
+        let confirmLogOut = confirm('are you sure you want to logout?')
+        if (confirmLogOut) {
+            firebase.auth().signOut().then(() => {
+                window.location.href = 'login.html'
+            }).catch((error) => {
+                alert(error);
+                // An error happened.
+            });
+        }
+
+    }
+
+    function deleteAcc() {
+        let ask = confirm('are you sure you want to delete this account?')
+        if (ask) {
+            const user = auth.currentUser;
+            user.delete().then(() => {
+                alert('account deleted successfully')
+                window.location.href = 'index.html'
+            }).catch((error) => {
+                alert(error)
+            });
+        }
+
+    }
+
+</script>

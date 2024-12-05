@@ -64,9 +64,13 @@
         user.updateProfile({
           displayName: username,
         }).then(() => {
-         alert('username updated');
-          // Update successful
-          // ...
+          alert('user updated')
+          user.sendEmailVerification()
+            .then(() => {
+              alert('Account created successfully , username updated , please check your email to verify account');
+            }).catch((err) => {
+              alert(err)
+            })
         }).catch((error) => {
           // An error occurred
           // ...
