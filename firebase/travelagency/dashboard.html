@@ -18,13 +18,13 @@
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
-        authDomain: "october-de7a2.firebaseapp.com",
-        projectId: "october-de7a2",
-        storageBucket: "october-de7a2.firebasestorage.app",
-        messagingSenderId: "982925731403",
-        appId: "1:982925731403:web:426c347a7cf686da2d0fce"
-    };
+    apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
+    authDomain: "october-de7a2.firebaseapp.com",
+    projectId: "october-de7a2",
+    storageBucket: "october-de7a2.firebasestorage.app",
+    messagingSenderId: "982925731403",
+    appId: "1:982925731403:web:426c347a7cf686da2d0fce"
+  };
 
     // Initialize Firebase
     const app = firebase.initializeApp(firebaseConfig);
@@ -33,7 +33,7 @@
     function checkUser(params) {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                document.body.innerHTML = `welcome <span > ${user.displayName}</span>  <button onclick="signUserOut()">log out</button>   <button onclick="deleteAcc()"> delete account </button>`
+                document.body.innerHTML = `welcome <span > ${user.displayName}</span>  <button onclick="signUserOut()">log out</button>   <button onclick="goToProfile()"> profile </button>`
                 console.log(user);
 
             } else {
@@ -61,18 +61,10 @@
 
     }
 
-    function deleteAcc() {
-        let ask = confirm('are you sure you want to delete this account?')
-        if (ask) {
-            const user = auth.currentUser;
-            user.delete().then(() => {
-                alert('account deleted successfully')
-                window.location.href = 'index.html'
-            }).catch((error) => {
-                alert(error)
-            });
-        }
+  
 
+    function goToProfile() {
+        window.location.href = "profile.html"
     }
 
 </script>
