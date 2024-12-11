@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #vid {
+            width: 500px;
+            height: 500px;
+        }
+
+        #whole {
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+
+        #preview {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="whole">
+        <video autoplay id="vid"> </video>
+        <button id="pic" onclick="takePic()"> take picture</button>
+    </div>
+
+    <button id="start" onclick="startCam()"> start </button>
+    <canvas width="100px" height="100px" id="canvas"> </canvas>
+
+    <div id="preview">
+
+    </div>
+</body>
+
+</html>
+<script>
+    let arrOfPictures = []
+    async function startCam() {
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+
+        vid.srcObject = stream
+    }
+
+    function takePic() {
+        canvas.getContext('2d').drawImage(vid, 0, 0, canvas.width, canvas.height)
+        let value = canvas.toDataURL('image/jpg')
+        arrOfPictures.push(value)
+        displayPics()
+        console.log(arrOfPictures);
+    }
+
+
+    function displayPics(params) {
+        preview.innerHTML = ''
+
+        arrOfPictures.forEach((pic , i) => {
+            preview.innerHTML += ` <button  onclick="showImage(${i} , '${pic}')"> <img src="${pic}" width="200px" height"200px"/> </button>`
+        })
+    }
+
+    displayPics()
+
+    function showImage(index , thepic) {
+        document.body.innerHTML = ` <button> prev </button> <img style="display:block;" src="${thepic}" width="100%" height="100vh" /> <button> next </button> `
+    
+    }
+
+</script>

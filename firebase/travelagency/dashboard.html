@@ -7,7 +7,14 @@
     <title>Document</title>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 </head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+</style>
 
 <body>
 
@@ -18,22 +25,41 @@
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-    apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
-    authDomain: "october-de7a2.firebaseapp.com",
-    projectId: "october-de7a2",
-    storageBucket: "october-de7a2.firebasestorage.app",
-    messagingSenderId: "982925731403",
-    appId: "1:982925731403:web:426c347a7cf686da2d0fce"
-  };
+        apiKey: "AIzaSyDZWJ85WZMICXDRxM0BURY3JZG40ZvLric",
+        authDomain: "october-de7a2.firebaseapp.com",
+        databaseURL: "https://october-de7a2-default-rtdb.firebaseio.com",
+        projectId: "october-de7a2",
+        storageBucket: "october-de7a2.firebasestorage.app",
+        messagingSenderId: "982925731403",
+        appId: "1:982925731403:web:426c347a7cf686da2d0fce"
+    };
 
     // Initialize Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const database = firebase.database();
+    let index
+
 
     function checkUser(params) {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                document.body.innerHTML = `welcome <span > ${user.displayName}</span>  <button onclick="signUserOut()">log out</button>   <button onclick="goToProfile()"> profile </button>`
+                document.body.innerHTML = `<div style="background-color: red; display:flex; justify-content: space-between;">
+                    <span> welcome <span > ${user.displayName}</span>  </span> <button onclick="goToProfile()"> profile </button>  <button onclick="signUserOut()">log out</button>   </div>
+                    <br>
+                    <p> Javascript Group Chat </p>
+                    <br> 
+                    <div>
+                        <input type="text" id="mssgInput" />  <button onclick="sendMessage()"> send </button> 
+                        
+                        </div>
+
+                        <div id="preview"> 
+                            
+                       </div>
+                    
+                    
+                    `
                 console.log(user);
 
             } else {
@@ -46,6 +72,25 @@
 
 
     checkUser()
+
+
+    function sendMessage() {
+        if (!mssgInput.value.trim()) {
+            alert('input is mandatory')
+        } else {
+            database.ref(`chats/${index}`).set({
+                sender: auth.currentUser.displayName,
+                time: new Date().toLocaleString(),
+                message: mssgInput.value.trim()
+            }).then(() => {
+                mssgInput.value = ''
+            }).catch((err) => {
+                alert(err)
+            })
+
+        }
+
+    }
 
 
     function signUserOut(params) {
@@ -61,10 +106,70 @@
 
     }
 
-  
+
 
     function goToProfile() {
         window.location.href = "profile.html"
     }
 
+
+    let div = document.createElement('main')
+
+
+    function displayAllMessages() {
+        document.body.appendChild(div)
+        div.innerHTML = 'LOADING...'
+
+        var starCountRef = database.ref('chats');
+        starCountRef.on('value', (snapshot) => {
+            const data = snapshot.val() || []
+            index = data.length
+            div.innerHTML = ''
+            preview.innerHTML = ''
+            data.forEach((chat, i) => {
+                let deleteButton = auth.currentUser.displayName === chat.sender ? `<button onclick="deleteMssg(${i})"> delete </button> <button onclick="editMssg(${i} , '${chat.message}')"> edit </button>` : ''
+
+                preview.innerHTML += `<p> <span> ${chat.sender}: </span>  <span> ${chat.message} </span>    ${deleteButton}  </p>
+                 <small> ${chat.time.slice(12, 17) + ' ' + chat.time.slice(21, 23)}  </small>
+
+                `
+
+            });
+
+            console.log(data);
+        });
+    }
+
+    setTimeout(() => {
+        displayAllMessages()
+    }, 2000);
+
+
+
+    function deleteMssg(index) {
+        let confirmButton = confirm('are ypou sure you want to delete?')
+        if (confirmButton) {
+            database.ref(`chats/${index}`).remove().then(() => {
+
+            }).catch((err) => {
+                alert(err)
+            })
+        }
+
+    }
+
+
+    function editMssg(index, mssg) {
+        let myPrompt = prompt('Enter new message', mssg)
+        if (myPrompt === '' || myPrompt === mssg) {
+            alert("empty or identical messages are not valid")
+        } else {
+            database.ref(`chats/${index}`).update(
+                { message: myPrompt }
+            ).then(()=> {
+
+            }).catch((err)=> alert(err))
+        }
+
+    }
 </script>
